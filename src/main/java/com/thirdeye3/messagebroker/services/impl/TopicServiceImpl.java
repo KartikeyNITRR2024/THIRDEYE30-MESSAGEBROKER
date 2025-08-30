@@ -1,7 +1,7 @@
 package com.thirdeye3.messagebroker.services.impl;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ import com.thirdeye3.messagebroker.utils.CodeGenerator;
 public class TopicServiceImpl implements TopicService {
 
     private static final Logger logger = LoggerFactory.getLogger(TopicServiceImpl.class);
-    private final Map<String, Topic> topicMap = new HashMap<>();
+    private final Map<String, Topic> topicMap = new ConcurrentHashMap<>();
 
     @Autowired
     QueueService queueService;
@@ -84,6 +84,17 @@ public class TopicServiceImpl implements TopicService {
         }
         queueService.clearQueue(topicName);
         logger.info("Topic {} cleared successfully", topicName);
+    }
+    
+    @Override
+    public void emptyAllTopic() {
+        logger.info("Clearing all topics: {}", topicMap.size());
+        for(String key : topicMap.keySet())
+        {
+        	Topic topic = topicMap.get(key);
+        	emptyTopic(topic.getTopicName(), topic.getTopicKey());
+        }
+        logger.info("Cleared all topis successfully");
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.thirdeye3.messagebroker.services.impl;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 import org.slf4j.Logger;
@@ -15,7 +15,7 @@ import com.thirdeye3.messagebroker.services.QueueService;
 public class QueueServiceImpl implements QueueService {
 
     private static final Logger logger = LoggerFactory.getLogger(QueueServiceImpl.class);
-    private final Map<String, ConcurrentLinkedDeque<Message>> queueMap = new HashMap<>();
+    private final Map<String, ConcurrentLinkedDeque<Message>> queueMap = new ConcurrentHashMap<>();
 
     @Override
     public void addQueue(String topicName) {

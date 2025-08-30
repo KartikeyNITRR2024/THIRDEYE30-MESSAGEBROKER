@@ -18,4 +18,6 @@ public interface TopicService {
 
 	boolean isTopicPresent(String topicName, String topicKey);
 
+	void emptyAllTopic();
+
 }

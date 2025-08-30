@@ -20,7 +20,7 @@ public class Initiatier {
 	@PostConstruct
     public void init() throws Exception{
         logger.info("Initializing Initiatier...");
-        topicService.emptyMap();
+        topicService.emptyAllTopic();
         logger.info("Initiatier initialized.");
     }
 
