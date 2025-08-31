@@ -14,6 +14,7 @@ import com.thirdeye3.messagebroker.services.MessageService;
 import com.thirdeye3.messagebroker.services.QueueService;
 import com.thirdeye3.messagebroker.services.TopicService;
 import com.thirdeye3.messagebroker.utils.TimeManager;
+import com.thirdeye3.messagebroker.services.MachineService;
 
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -28,6 +29,9 @@ public class MessageServiceImpl implements MessageService {
 
     @Autowired
     TimeManager timeManager;
+    
+	@Autowired
+	MachineService machineService;
 
     @Override
     public Message getMessage(String topicName, String topicKey) {
@@ -98,4 +102,18 @@ public class MessageServiceImpl implements MessageService {
         }
         logger.info("Added {} messages to topic: {}", messages.size(), topicName);
     }
+
+	@Override
+	public List<Message> getMessagesForTelegramBot(Integer telegramBotId, String telegramBotCode, String topicName,
+			String topicKey, Long count) {
+	    machineService.validateMachine(telegramBotId, telegramBotCode);
+		return getMessages(topicName, topicKey, count);
+	}
+
+	@Override
+	public Message getMessageForTelegramBot(Integer telegramBotId, String telegramBotCode, String topicName,
+			String topicKey) {
+	    machineService.validateMachine(telegramBotId, telegramBotCode);
+		return getMessage(topicName, topicKey);
+	}
 }

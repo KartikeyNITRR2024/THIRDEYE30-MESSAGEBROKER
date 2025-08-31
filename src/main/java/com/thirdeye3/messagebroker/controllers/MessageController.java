@@ -31,6 +31,16 @@ public class MessageController {
         return new Response<>(true, 0, null, messageService.getMessages(topicName, topicKey, count));
     }
     
+    @GetMapping("/telegrambot/{id}/{code}/{topicname}/{topickey}")
+    public Response<Message> getMessageForTelegramBot(@PathVariable("id") Integer telegramBotId, @PathVariable("code") String telegramBotCode, @PathVariable("topicname") String topicName, @PathVariable("topickey") String topicKey) {
+        return new Response<>(true, 0, null, messageService.getMessageForTelegramBot(telegramBotId, telegramBotCode, topicName, topicKey));
+    }
+    
+    @GetMapping("/multiple/telegrambot/{id}/{code}/{topicname}/{topickey}/{count}")
+    public Response<List<Message>> getMultipleMessageForTelegramBot(@PathVariable("id") Integer telegramBotId, @PathVariable("code") String telegramBotCode, @PathVariable("topicname") String topicName, @PathVariable("topickey") String topicKey, @PathVariable("count") Long count) {
+        return new Response<>(true, 0, null, messageService.getMessagesForTelegramBot(telegramBotId, telegramBotCode, topicName, topicKey, count));
+    }
+    
     @PostMapping("/{topicname}/{topickey}")
     public Response<String> setMessage(@PathVariable("topicname") String topicName, @PathVariable("topickey") String topicKey, @RequestBody Object message) {
     	messageService.setMessage(topicName, topicKey, message);

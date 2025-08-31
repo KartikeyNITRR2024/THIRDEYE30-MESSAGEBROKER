@@ -14,4 +14,9 @@ public interface MessageService {
 	
 	void setMessages(String topicName, String topicKey, List<Object> messages);
 
+	List<Message> getMessagesForTelegramBot(Integer telegramBotId, String telegramBotCode, String topicName, String topicKey,
+			Long count);
+
+	Message getMessageForTelegramBot(Integer telegramBotId, String telegramBotCode, String topicName, String topicKey);
+
 }

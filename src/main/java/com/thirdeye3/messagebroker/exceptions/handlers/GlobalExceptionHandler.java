@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.thirdeye3.messagebroker.dtos.Response;
+import com.thirdeye3.messagebroker.exceptions.InvalidMachineException;
 import com.thirdeye3.messagebroker.exceptions.MessageException;
 import com.thirdeye3.messagebroker.exceptions.TopicException;
 
@@ -22,6 +23,13 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Response<Void>> handleTopicException(TopicException ex) {
         return buildResponse(false, HttpStatus.NOT_FOUND.value(), ex.getMessage(), null);
     }
+    
+    @ExceptionHandler(InvalidMachineException.class)
+    public ResponseEntity<Response<Void>> handleTopicException(InvalidMachineException ex) {
+        return buildResponse(false, HttpStatus.NOT_FOUND.value(), ex.getMessage(), null);
+    }
+    
+    
     
 
     private <T> ResponseEntity<Response<T>> buildResponse(
