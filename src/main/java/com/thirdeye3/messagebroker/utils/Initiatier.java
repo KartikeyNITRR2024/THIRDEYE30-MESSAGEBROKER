@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.thirdeye3.messagebroker.services.MachineService;
 import com.thirdeye3.messagebroker.services.TopicService;
 
 import jakarta.annotation.PostConstruct;
@@ -17,10 +18,14 @@ public class Initiatier {
     @Autowired
     private TopicService topicService;
     
+    @Autowired
+    private MachineService machineService;
+    
 	@PostConstruct
     public void init() throws Exception{
         logger.info("Initializing Initiatier...");
         topicService.emptyAllTopic();
+        machineService.fetchMachines();
         logger.info("Initiatier initialized.");
     }
 
