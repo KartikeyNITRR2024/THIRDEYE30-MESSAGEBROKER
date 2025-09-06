@@ -23,6 +23,9 @@ public class TopicServiceImpl implements TopicService {
 
     @Autowired
     QueueService queueService;
+    
+    @Autowired
+    CodeGenerator codeGenerator;
 
     @Value("${thirdeye.maximumqueuesize}")
     private Long maximumQueueSize;
@@ -45,7 +48,7 @@ public class TopicServiceImpl implements TopicService {
             logger.error("Topic {} already exists", topicName);
             throw new TopicException("Topic allready exists");
         }
-        String topicKey = CodeGenerator.generateUniqueCode(8);
+        String topicKey = codeGenerator.generateUniqueCode(8);
         queueService.addQueue(topicName);
         Topic topic = new Topic(topicName, topicKey, maxLength);
         topicMap.put(topicName, topic);
