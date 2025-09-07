@@ -41,6 +41,7 @@ public class Initiatier {
         {
         	topicService.addTopic("thresold", 1000L);
         	topicService.addTopic("telegramthresold", 1000L);
+        	topicService.addTopic("users", 1000L);
         	isFirstTime = false;
         }
         logger.info("Initiatier initialized.");
