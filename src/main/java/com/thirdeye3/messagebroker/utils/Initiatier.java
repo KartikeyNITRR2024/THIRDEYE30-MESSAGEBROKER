@@ -1,5 +1,7 @@
 package com.thirdeye3.messagebroker.utils;
 
+import java.util.concurrent.TimeUnit;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +27,13 @@ public class Initiatier {
     @Value("${thirdeye.istesting}")
     private Integer testing;
     
+    @Value("${thirdeye.priority}")
+    private Integer priority;
+    
 	@PostConstruct
     public void init() throws Exception{
         logger.info("Initializing Initiatier...");
-        topicService.emptyAllTopic();
+    	TimeUnit.SECONDS.sleep(priority * 3);
         machineService.fetchMachines();
         if(testing == 1)
         {
@@ -37,6 +42,13 @@ public class Initiatier {
         }
         logger.info("Initiatier initialized.");
     }
+	
+	public void refreshMemory()
+	{
+		logger.info("Going to refersh memory...");
+		topicService.emptyAllTopic();
+		logger.info("Memory refreshed.");
+	}
 
 }
 
