@@ -30,15 +30,18 @@ public class Initiatier {
     @Value("${thirdeye.priority}")
     private Integer priority;
     
+    private Boolean isFirstTime = true;
+    
 	@PostConstruct
     public void init() throws Exception{
         logger.info("Initializing Initiatier...");
     	TimeUnit.SECONDS.sleep(priority * 3);
         machineService.fetchMachines();
-        if(testing == 1)
+        if(testing == 1 && isFirstTime)
         {
         	topicService.addTopic("thresold", 1000L);
         	topicService.addTopic("telegramthresold", 1000L);
+        	isFirstTime = false;
         }
         logger.info("Initiatier initialized.");
     }
