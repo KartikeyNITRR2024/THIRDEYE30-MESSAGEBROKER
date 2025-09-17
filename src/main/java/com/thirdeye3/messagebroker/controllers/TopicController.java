@@ -12,7 +12,7 @@ import com.thirdeye3.messagebroker.dtos.Topic;
 import com.thirdeye3.messagebroker.services.TopicService;
 
 @RestController
-@RequestMapping("/api/topic")
+@RequestMapping("/mb/topic")
 public class TopicController {
 
     @Autowired

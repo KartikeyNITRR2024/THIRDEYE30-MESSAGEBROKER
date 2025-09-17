@@ -15,7 +15,7 @@ import com.thirdeye3.messagebroker.dtos.Response;
 import com.thirdeye3.messagebroker.services.MessageService;
 
 @RestController
-@RequestMapping("/api/message")
+@RequestMapping("/mb/message")
 public class MessageController {
 
     @Autowired

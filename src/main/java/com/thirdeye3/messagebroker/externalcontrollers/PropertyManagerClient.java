@@ -9,6 +9,6 @@ import com.thirdeye3.messagebroker.dtos.Response;
 @FeignClient(name = "THIRDEYE30-PROPERTYMANAGER")
 public interface PropertyManagerClient {
 
-    @GetMapping("/api/machines/telegrambot")
+    @GetMapping("/pm/machines/telegrambot")
     Response<MachineInfo> getMachines();
 }
