@@ -5,8 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.thirdeye3.messagebroker.dtos.MachineInfo;
 import com.thirdeye3.messagebroker.dtos.Response;
+import com.thirdeye3.messagebroker.configs.FeignConfig;
 
-@FeignClient(name = "THIRDEYE30-PROPERTYMANAGER")
+@FeignClient(
+		name = "THIRDEYE30-PROPERTYMANAGER",
+		configuration = FeignConfig.class
+)
 public interface PropertyManagerClient {
 
     @GetMapping("/pm/machines/telegrambot")
