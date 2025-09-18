@@ -36,7 +36,7 @@ public class MessageController {
         return new Response<>(true, 0, null, messageService.getMessageForTelegramBot(telegramBotId, telegramBotCode, topicName, topicKey));
     }
     
-    @GetMapping("/multiple/telegrambot/{id}/{code}/{topicname}/{topickey}/{count}")
+    @GetMapping("/telegrambot/multiple/{id}/{code}/{topicname}/{topickey}/{count}")
     public Response<List<Message>> getMultipleMessageForTelegramBot(@PathVariable("id") Integer telegramBotId, @PathVariable("code") String telegramBotCode, @PathVariable("topicname") String topicName, @PathVariable("topickey") String topicKey, @PathVariable("count") Long count) {
         return new Response<>(true, 0, null, messageService.getMessagesForTelegramBot(telegramBotId, telegramBotCode, topicName, topicKey, count));
     }
