@@ -1,7 +1,5 @@
 package com.thirdeye3.messagebroker.filters;
 
-package com.thirdeye3.messagebroker.filters;
-
 
 import com.thirdeye3.messagebroker.dtos.Response;
 import com.fasterxml.jackson.databind.ObjectMapper;
