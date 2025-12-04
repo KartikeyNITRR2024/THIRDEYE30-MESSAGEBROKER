@@ -1,36 +1,36 @@
 package com.thirdeye3.messagebroker.filters;
 
-import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import org.springframework.web.filter.OncePerRequestFilter;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thirdeye3.messagebroker.dtos.Response;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import java.io.IOException;
 
 @Component
-public class ApiKeyFIlter extends OncePerRequestFilter {
+public class ApiKeyFilter extends OncePerRequestFilter {
 
     @Value("${thirdeye.api.key}")
     private String apiKey;
 
-    @Value("${self.url}")
-    private String selfUrl;
-
     private static final ObjectMapper objectMapper = new ObjectMapper();
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getRequestURI();
+        return path.startsWith("/api/statuschecker");
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-
-        String requestUrl = request.getRequestURL().toString();
 
         String requestApiKey = request.getHeader("THIRDEYE-API-KEY");
         if (requestApiKey == null) {
